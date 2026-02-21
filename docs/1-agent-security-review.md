@@ -198,99 +198,180 @@ gh copilot explain requirements.txt
 
 ### Step 6: Document Findings in GitHub Issue
 
-**Objective**: Create a comprehensive audit report.
+**Objective**: Create an issue using YOUR actual findings (not a template).
 
-Create a GitHub issue to document all findings:
+The key insight: Each candidate's findings may vary slightly based on agent version, pattern matching, and environment. Your issue should reflect **what YOU actually found**, not hardcoded examples.
+
+#### Option A: Auto-Generate Issue from Agent Output (Recommended)
+
+Create a dynamic script that parses your agent findings and creates an issue:
 
 ```bash
-gh issue create --title "[SECURITY AUDIT] Exercise 1: Agent Security Review Findings" \
-  --label "security,review-exercise" \
-  --body "## SecureTrails Security Audit - Exercise 1
+# Create helper script
+cat > create-findings-issue.py << 'EOF'
+#!/usr/bin/env python3
+"""
+Create GitHub issue from actual baseline-checker findings.
+This works regardless of how many/which vulnerabilities are found.
+"""
+import json
+import subprocess
+import sys
 
-## Vulnerabilities Found
+# Step 1: Run the agent
+print("Running baseline security agent...")
+result = subprocess.run(
+    ['python', '.github/agents/baseline-checker.py'],
+    capture_output=True,
+    text=True
+)
 
-### Critical Issues (MUST FIX)
+try:
+    findings = json.loads(result.stdout)
+except:
+    print("❌ Error: Agent output was not valid JSON")
+    print(f"Output: {result.stdout}")
+    sys.exit(1)
 
-#### 1. SQL Injection in Login Form
-- **File**: app.py:47
-- **Severity**: CRITICAL
-- **Description**: User input directly interpolated into SQL query
-- **Code**: \`query = f\"SELECT * FROM users WHERE username = '{username}'\"\`
-- **Impact**: Complete database compromise
-- **Fix**: Use parameterized queries
+# Step 2: Extract findings
+vulns = findings.get('vulnerabilities', [])
+summary = findings.get('summary', {})
 
-#### 2. Hardcoded JWT Secret
-- **File**: app.py:12
-- **Severity**: CRITICAL
-- **Description**: JWT secret hardcoded in source
-- **Evidence**: \`JWT_SECRET = 'super-secret-key-12345'\`
-- **Impact**: Token forgery, account takeover
-- **Fix**: Move to .env variable
+# Group by severity (dynamically, whatever was found)
+by_severity = {}
+for v in vulns:
+    severity = v.get('severity', 'UNKNOWN')
+    if severity not in by_severity:
+        by_severity[severity] = []
+    by_severity[severity].append(v)
 
-#### 3. XSS in Trail Comments
-- **File**: templates/trails.html:89
-- **Severity**: HIGH
-- **Description**: User comments rendered without escaping
-- **Code**: \`{{ trail.comment }}\` without filter
-- **Impact**: Cookie theft, session hijacking
-- **Fix**: Apply Jinja2 auto-escape or manual escape
+# Step 3: Build issue dynamically
+issue_body = f"""## 🔐 Security Audit - Exercise 1
 
-### High-Risk Issues
+Agent scanned SecureTrails application and found **{len(vulns)} vulnerabilities**.
 
-#### 4. Weak Password Hashing
-- **File**: app.py:200
-- **Severity**: HIGH
-- **Description**: MD5 used for password hashing (broken hash)
-- **Impact**: Rainbow table attacks
-- **Fix**: Use bcrypt or argon2
+### Summary
+"""
 
-#### 5. CORS Misconfiguration
-- **File**: app.py:5
-- **Severity**: HIGH
-- **Description**: CORS allows all origins (\`*\`)
-- **Impact**: Cross-origin attacks
-- **Fix**: Restrict to known domains
+# Add severity breakdown
+for severity in ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']:
+    count = len(by_severity.get(severity, []))
+    if count > 0:
+        issue_body += f"- **{severity}**: {count} issues\\n"
 
-#### 6. Exposed Credentials in .env.example
-- **File**: .env.example
-- **Severity**: HIGH
-- **Description**: Database and API credentials in example
-- **Impact**: If committed, credentials exposed
-- **Fix**: Keep example values generic
+if len(vulns) == 0:
+    issue_body += "- ✅ No vulnerabilities detected!"
 
-#### 7. Insecure Dependencies
-- **File**: requirements.txt
-- **Severity**: MEDIUM
-- **Description**: Outdated packages with known CVEs
-  - Flask 1.1.0 (multiple CVEs)
-  - requests 2.24.0 (CVE-2021-XXXXX)
-  - SQLAlchemy 1.3.0 (injection vectors)
-- **Impact**: Exploitation via dependencies
-- **Fix**: Update all packages
+# Add details for each severity
+for severity in ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']:
+    vulns_at_level = by_severity.get(severity, [])
+    if not vulns_at_level:
+        continue
+    
+    issue_body += f"\\n### {severity} Severity Issues\\n"
+    for i, v in enumerate(vulns_at_level, 1):
+        issue_body += f"""
+{i}. **{v['type']}** at {v['file']}:{v['line']}
+   - **Issue**: {v['issue']}
+   - **Fix**: {v['fix']}"""
 
-## Summary
+# Assessment
+issue_body += f"""
 
-- Total Vulnerabilities Found: **7**
-- Critical: **2**
-- High: **4**
-- Medium: **1**
-- Status: **NOT READY FOR LAUNCH** ⚠️
+### Recommendation
+**Ready for Production?** {"✅ Yes - no critical vulnerabilities" if len(by_severity.get('CRITICAL', [])) == 0 else "⚠️ No - critical issues must be fixed first"}
 
-## Next Steps
-
-1. Proceed to Exercise 2 for supply chain analysis
-2. Generate fixes using Copilot agent
-3. Create PRs to remediate each issue
+### Next Steps
+1. Review findings above
+2. Proceed to Exercise 2: Supply Chain Analysis  
+3. Create PRs to fix critical issues
+4. Re-run agent to verify fixes
 
 ---
-Generated by Exercise 1: GitHub Agent Security Review
-"
+Generated by Exercise 1 Security Review Agent
+"""
+
+# Step 4: Create GitHub issue with actual findings
+title = f"[SECURITY] Exercise 1: {len(vulns)} vulnerabilities found"
+
+cmd = ['gh', 'issue', 'create',
+       '--title', title,
+       '--label', 'security,exercise',
+       '--body', issue_body]
+
+print(f"Creating issue: {title}")
+result = subprocess.run(cmd)
+
+if result.returncode == 0:
+    print("✅ Issue created successfully")
+else:
+    print("❌ Failed to create issue")
+    
+sys.exit(result.returncode)
+EOF
+
+# Run the script
+python create-findings-issue.py
 ```
 
-**Verify issue created:**
+**Key advantages:**
+- ✅ Uses YOUR actual agent findings
+- ✅ Works whether you find 3, 5, or 7 vulnerabilities
+- ✅ Dynamically groups by severity
+- ✅ Provides honest assessment based on what YOU found
+- ✅ No hardcoded assumptions
+
+#### Option B: Manual Quick Issue (If Script Fails)
+
 ```bash
-gh issue list --label security
+# Simple fallback if automation doesn't work
+
+# First, see what you actually found
+echo "Your findings:"
+python .github/agents/baseline-checker.py | head -50
+
+# Then create basic issue with your results
+gh issue create \
+  --title "[SECURITY] Exercise 1: Security review findings" \
+  --label "security,exercise" \
+  --body "## Exercise 1 Findings
+
+Run this to see YOUR actual findings:
+\`\`\`bash
+python .github/agents/baseline-checker.py
+\`\`\`
+
+Copy the output above and paste your specific vulnerabilities here.
+
+Assessment: [Pass/Fail/Needs Review]
+Next: Proceed to Exercise 2"
 ```
+
+#### Option C: Manual Full Issue (Reference Your Output)
+
+If you prefer manual entry, review your findings first:
+
+```bash
+# Check what the agent actually found on YOUR system
+python .github/agents/baseline-checker.py
+
+# Review the output, then create issue documenting what YOU found
+# (Not what the exercise guide shows)
+
+gh issue create --title "[SECURITY] Exercise 1 Findings" \
+  --label "security,exercise" \
+  --body "[Paste your actual findings here from agent output]"
+```
+
+#### ⚡ Key Point
+
+**Every candidate will have slightly different findings.** This is normal because:
+- Agent detection patterns may match differently
+- Python/library versions might affect regex matching
+- File encoding or line endings could vary
+- Environment settings differ
+
+The important part is: **You understand what was found and why it matters**, not that you get exact matches to a template.
 
 ---
 
