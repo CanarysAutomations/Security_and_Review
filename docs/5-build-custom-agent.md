@@ -6,6 +6,33 @@
 
 ---
 
+## 🎯 Important Clarity
+
+**These "agents" are NOT complex AI framework objects.** They're elegant Python scripts.
+
+### What is an Agent? (In this workshop)
+
+```
+Just a Python script that:
+1. Reads code/files as INPUT
+2. Scans using patterns/logic
+3. Outputs JSON findings
+4. Returns exit code 0 (pass) or 1 (fail)
+5. Gets orchestrated by GitHub Actions
+```
+
+### Why Python Scripts, Not A Framework?
+
+✅ **Simple** - Anyone can read/modify the code  
+✅ **Reliable** - No external framework dependencies  
+✅ **Composable** - Chain scripts together easily  
+✅ **Copilot-friendly** - Easy for AI to generate/modify  
+✅ **Production-proven** - Used by real teams  
+
+**This is better than aspirational "agent SDKs"** because it ACTUALLY WORKS. ✓
+
+---
+
 ## 🎯 Learning Objectives
 
 ✅ Understand agent anatomy (input → detection → output → exit code)  
@@ -93,83 +120,44 @@ if __name__ == '__main__':
 
 ## 🛠️ Build: Database Encryption Agent
 
-### Step 1: Create Agent File
+### Step 1: Use Copilot CLI to Generate Agent Code
+
+Launch Copilot CLI:
 
 ```bash
+copilot
+```
+
+Paste this prompt:
+
+```
+Create a Python security agent that detects unencrypted database connections.
+
+The agent should:
+1. Scan all .py files in the current directory
+2. Detect patterns like:
+   - postgresql://user:password@ (unencrypted credentials)
+   - mysql://... (plaintext connection)
+   - password = '...' (hardcoded passwords)
+3. Output JSON with: file, line number, type, severity
+4. Return exit code 1 if issues found, 0 if clean
+5. Can be run as: python agent.py > findings.json
+
+Make it production-ready with error handling and proper JSON output.
+```
+
+**Copilot responds with complete agent code!** Copy it:
+
+```bash
+# Create the agent file
 cat > .github/agents/database-encryption-checker.py << 'EOF'
-#!/usr/bin/env python3
-"""
-Agent: Unencrypted Database Connection Detector
-Finds: Database credentials/URLs with plaintext passwords or HTTP connections
-"""
-
-import json
-import re
-from pathlib import Path
-
-PATTERNS = {
-    'UNENCRYPTED_DB_CONNECTION': [
-        # Find plaintext passwords in connection strings
-        r'(postgresql|mysql|mongo)://[^:]+:[^@]+@',
-        r'DB_URL.*=.*postgresql://.*:.*@',
-        r'password\s*=\s*["\'][^"\']+["\']',  # Hardcoded password
-    ],
-    'UNENCRYPTED_HTTP': [
-        # Database over HTTP instead of HTTPS
-        r'/api/.*http://',
-        r'requests\.post\(.*http://.*database',
-    ],
-}
-
-def scan_files(patterns):
-    """Scan all Python files for unencrypted database patterns"""
-    findings = []
-    
-    for py_file in Path('.').rglob('*.py'):
-        try:
-            with open(py_file, 'r', encoding='utf-8') as f:
-                for line_num, line in enumerate(f, 1):
-                    for issue_type, pattern_list in patterns.items():
-                        for pattern in pattern_list:
-                            if re.search(pattern, line, re.IGNORECASE):
-                                findings.append({
-                                    'file': str(py_file),
-                                    'line': line_num,
-                                    'type': issue_type,
-                                    'severity': 'HIGH',
-                                    'description': f'Potential unencrypted database connection detected',
-                                    'code_snippet': line.strip()[:100]
-                                })
-        except Exception as e:
-            pass
-    
-    return findings
-
-def main():
-    # Scan and report
-    findings = scan_files(PATTERNS)
-    
-    output = {
-        'vulnerabilities': findings,
-        'summary': {
-            'total': len(findings),
-            'high': len([f for f in findings if f['severity'] == 'HIGH']),
-        }
-    }
-    
-    print(json.dumps(output, indent=2))
-    
-    # Exit code: 0 = secure, 1 = vulnerabilities found
-    exit(1 if findings else 0)
-
-if __name__ == '__main__':
-    main()
+[paste Copilot output here]
 EOF
 
 chmod +x .github/agents/database-encryption-checker.py
 ```
 
-### Step 2: Test Your Agent
+### Step 2: Test Your Copilot-Generated Agent
 
 ```bash
 # Run the agent on the vulnerable app
