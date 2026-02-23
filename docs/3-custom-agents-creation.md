@@ -147,145 +147,133 @@ def search_trails():
     query = f"SELECT * FROM trails WHERE location = '{location}'"
     results = db.execute(query)
     return jsonify(results)
-```
+## 🛠️ Step 2: Create SQL Injection Fix Agent
 
-**AFTER (Secure)**:
-```python
-@app.route('/api/trails')
-def search_trails():
-    location = request.args.get('location')
-    query = "SELECT * FROM trails WHERE location = ?"
-    results = db.execute(query, (location,))
-    return jsonify(results)
-```
+Ask Copilot CLI to generate a fix guide:
 
-### Step 4: Test the Fix
-
-**Test with normal input**:
 ```bash
-curl "http://localhost:5000/api/trails?location=Colorado"
-# Should return trails in Colorado
+npx @github/copilot -i "I'm a lead dev at SecureTrails (Flask/Python app) flagged by GitHub GHAS for SQL injection in our database layer.
+
+Here's what we found:
+- File: app.py, Line 47
+- Problem: User input from request.args directly concatenated into SQL queries
+- Example: query = f\"SELECT * FROM trails WHERE location = '{user_input}'\"
+- This breaks auth AND lets attackers dump the entire database
+
+I need to create a remediation guide for our team (2 seniors, 1 junior).
+
+Create a structured, implementable guide covering:
+1. What's the risk? (what could attackers actually DO?)
+2. Root cause analysis (where in our code?)
+3. Step-by-step fix process (like: identify vulnerable points, use parameterized queries, test with payloads)
+4. Before/After code examples (show Python SQLAlchemy AND raw DB-API patterns)
+5. Testing strategy (including injection payloads to try)
+6. Common mistakes (hardcoding IDs, forgetting session checks, etc)
+7. Timeline (how long should this take?)
+8. Success criteria (how do we know it's fixed?)
+
+Make it something we can hand to a developer without needing hand-holding. Format as a .md file."
 ```
 
-**Test with SQL injection payload**:
-```bash
-curl "http://localhost:5000/api/trails?location=Colorado' OR '1'='1"
-# Should return NO trails (or error)
-# BEFORE fix: Would return ALL trails
-# AFTER fix: Safely handles the quote as a string
-```
-
-### Step 5: Code Review Checklist
-- [ ] All user input queries use parameterized queries
-- [ ] No f-string SQL query construction
-- [ ] No string concatenation in queries
-- [ ] Tests confirm injection attempts fail safely
-- [ ] Security team approval
-
-### Step 6: Deploy
-1. Merge PR after security review
-2. Deploy to staging first
-3. Run integration tests
-4. Monitor production logs for errors
-
-## Common Pitfalls to Avoid
-❌ Sanitizing input with string escaping (doesn't work reliably)
-❌ Using only for user input (ALL external input needs parameterization)
-❌ Mixing parameterized and non-parameterized queries
-
-## Success Criteria
-✅ No SQL injection test payloads succeed
-✅ All legitimate queries work correctly
-✅ GitHub GHAS reports 0 SQL injection findings
-✅ Security team approval obtained
-```
+**Copilot generates** a complete `.md` remediation guide. Copy the entire response.
 
 ---
 
-## 📝 Step 3: Save the Agent Guide
+## 📝 Step 3: Save the Agent Guide to Repository
 
-Save what Copilot generated as a custom agent:
+Create the file in your repo:
 
-**File**: `.github/agents/sql-injection-fix-guide.md`
+**File path**: `.github/agents/sql-injection-fix-guide.md`
 
-**Content**: (Paste Copilot's entire response)
+**To create it:**
 
-This is your first **custom agent** - a domain-specific fix guide created by Copilot CLI.
+1. In VS Code, create new file: `.github/agents/sql-injection-fix-guide.md`
+2. Paste Copilot's entire response into this file
+3. Save with `Ctrl+S`
+4. Commit to git:
+
+```bash
+git add .github/agents/sql-injection-fix-guide.md
+git commit -m "docs: Add SQL injection remediation guide agent"
+git push
+```
+
+✅ **First custom agent created!**
 
 ---
 
-## 🔄 Step 4: Create More Custom Agents - Domain-Specific Remediations
+## 🔄 Step 4: Create More Agents - Repeat for Other Vulnerabilities
 
-Repeat for other vulnerabilities found by GHAS:
+Follow the same pattern for each vulnerability GHAS found:
 
 ### Agent 2: Authentication & Authorization Fix
 
-Ask Copilot CLI:
 ```bash
-npx @github/copilot -i "Our SecureTrails Flask app has a broken authentication issue flagged by GitHub GHAS.
-Problem: We're not validating user permissions on data modifications.
+npx @github/copilot -i "Our SecureTrails Flask app has broken authentication flagged by GitHub GHAS.
+Problem: No user permission validation on data modifications.
+- User A can modify User B's bookings by changing URL parameter
+- Sessions exist but aren't checked on PUT/DELETE/POST
+- Example: DELETE /booking/123 should verify logged-in user OWNS it
 
-Specifically:
-- User A can modify User B's trail bookings by changing URL parameter
-- Sessions exist but aren't checked on state-changing operations (PUT, DELETE, POST)
-- Example: DELETE /booking/123 should verify logged-in user OWNS booking 123
-
-Create a fix guide covering:
-1. Why this is CRITICAL business risk (attackers can book/cancel other users' trips)
+Create a remediation guide covering:
+1. Business risk (attackers can book/cancel other users' trips)
 2. Root cause (session handling vs permission validation)
-3. How to implement proper authorization checks in Flask decorators
+3. Fix implementation (Flask decorators for authorization checks)
 4. Before/After code (vulnerable vs secure endpoint)
 5. How to test permission boundaries
-6. Common mistakes (hardcoding IDs, forgetting session checks)
+6. Common mistakes (hardcoding IDs, missing session checks)
+7. Timeline (implementable in 1-2 days?)
 
-Include Flask-Login patterns. Should be implementable in 1-2 days."
+Include Flask-Login patterns. Format as .md"
 ```
 
-Save as: `.github/agents/authentication-fix-guide.md`
+**Save to**: `.github/agents/authentication-fix-guide.md`
+
+---
 
 ### Agent 3: XSS Prevention Fix
 
-Ask Copilot CLI:
 ```bash
-npx @github/copilot -i "GitHub GHAS flagged XSS vulnerabilities in our Jinja2 templates where user-submitted trail comments and descriptions are rendered without HTML escaping.
+npx @github/copilot -i "GitHub GHAS flagged XSS in our Jinja2 templates - user comments/descriptions rendered without HTML escaping.
 
-Risk: Attackers inject JavaScript that runs in OTHER users' browsers (stealing cookies, redirecting to malware).
+Risk: Attackers inject JavaScript in other users' browsers (steal cookies, redirect to malware).
 
 Create a remediation guide:
-1. How does XSS happen in Jinja2? (what template pattern are we using wrong?)
-2. Why is this dangerous for SecureTrails? (we store user comments)
-3. How to fix templates - Jinja2 escaping patterns and autoescape
+1. How XSS exploits our Jinja2 templates (what pattern is wrong?)
+2. Why it's dangerous for trail booking (we store user comments)
+3. Jinja2 escaping patterns and how autoescape works
 4. Before/After template examples
-5. Content Security Policy headers we should add to app.py
-6. Testing - verify XSS payloads are neutralized (include test payloads)
-7. Performance implications of escaping?
+5. Content Security Policy headers for app.py
+6. Testing - verify XSS payloads are neutralized
+7. Performance impact of escaping?
 
-We're escaping inconsistently. Explain when escaping is needed vs not. Show safe defaults."
+We're inconsistently escaping. Explain when it's needed vs not. Format as .md"
 ```
 
-Save as: `.github/agents/xss-fix-guide.md`
+**Save to**: `.github/agents/xss-fix-guide.md`
+
+---
 
 ### Agent 4: Dependency Security Fix
 
-Ask Copilot CLI:
 ```bash
-npx @github/copilot -i "Our requirements.txt has flagged vulnerabilities in dependencies (Flask 1.1.2 → 2.3.0, Jinja2 2.11 → 3.1.0, requests 2.28.0 → older).
+npx @github/copilot -i "Our requirements.txt has vulnerable dependencies flagged by Dependabot (Flask 1.1.2→2.3.0, Jinja2 2.11→3.1.0, etc).
 
-We need a process for safely upgrading without breaking the application.
+We need a safe upgrade process without breaking the app.
 
-Create a guide:
-1. What are the risks of upgrading vs NOT upgrading dependencies?
-2. Breaking changes to watch for between Flask 1.x and 2.x
-3. Testing strategy (unit tests? integration tests? manual?)
+Create a remediation guide:
+1. Risks of upgrading vs NOT upgrading
+2. Breaking changes between Flask 1.x and 2.x
+3. Testing strategy (unit? integration? manual?)
 4. Rollback plan if something breaks
-5. Step-by-step upgrade process (what order?)
-6. How to verify no regression after upgrade
-7. Documentation update checklist
+5. Step-by-step upgrade order
+6. How to verify no regression
+7. Documentation checklist
 
-We have a 2-hour regression test window before the next deploy."
+We have a 2-hour regression test window. Format as .md"
 ```
 
-Save as: `.github/agents/dependency-update-guide.md`
+**Save to**: `.github/agents/dependency-update-guide.md`
 
 ---
 

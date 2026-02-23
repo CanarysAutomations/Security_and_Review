@@ -72,12 +72,6 @@ The app has:
 What are the biggest red flags I should look for?"
 ```
 
-**Why this prompt works:**
-- ✅ Specific context (Flask, booking app, file locations)
-- ✅ Clear enumerated outcomes (top 3, impact, prevention)
-- ✅ Conversational (feels like asking a colleague)
-- ✅ Open-ended (invites detailed responses)
-
 **Copilot responds** with contextual overview:
 
 ```
@@ -114,7 +108,7 @@ These three risks compound each other...
 Now ask a follow-up question about one specific finding:
 
 ```bash
-npx @github/copilot -i "Let's focus on SQL injection vulnerability that GitHub GHAS probably flagged in the app.py file around the trails search function.
+npx @github/copilot -i "Let's focus on SQL injection vulnerability that GitHub GHAS probably flagged in the @app.py file around the trails search function.
 
 Can you walk me through:
 1. How would an attacker actually exploit this specific vulnerability?
