@@ -42,23 +42,22 @@ TIER 2: INTERACTIVE ANALYSIS (Your Team - Access via CLI)
 └─ Security team uses to prioritize & recommend fixes
    → Human expertise via CLI. Requires Copilot license.
 
-TIER 3: CUSTOM EXTENSION (Your .py Files - What YOU Build)
-├─ Python security detection scripts (.github/agents/*.py)
-├─ Domain-specific vulnerability patterns
-└─ Runs in CI/CD pipeline
-   → Your specialized rules. You write and maintain these files.
+TIER 3: CUSTOM AGENTS (Your .md Fix Guides - What YOU Create)
+├─ .md files documenting HOW to fix vulnerabilities
+├─ Created using Copilot CLI prompts
+├─ Stored in `.github/agents/` as reference guides
+└─ Follow step-by-step remediation for each issue
+   → Your domain-specific fix documentation.
 
 TIER 4: ORCHESTRATION (GitHub Actions Workflow)
-├─ GitHub Actions (chains everything together)
-├─ Calls GHAS (native)
-├─ Calls your .py detection scripts
-├─ Creates issues from findings
-├─ Blocks PRs on critical severity
-└─ Reports to security dashboard
+├─ GitHub Actions (chains GHAS detection with custom agents)
+├─ Creates issues linked to agent fix guides
+├─ Developers follow guides to remediate
+└─ Tracks remediation progress
    → Integration layer. Glues everything.
 ```
 
-**IMPORTANT**: GitHub GHAS is NOT .py files. Custom detection tools ARE .py files.
+**IMPORTANT**: This is NOT about pre-built .py files. Custom agents are .md fix guides YOU create using Copilot CLI.
 
 ---
 
@@ -69,8 +68,8 @@ TIER 4: ORCHESTRATION (GitHub Actions Workflow)
 | **0** | 10 min | Prerequisites | Clone repo, setup auth, verify tools | gh, git, Python |
 | **1** | 20 min | GitHub NATIVE | Enable CodeQL, Secrets, Dependabot | GitHub GHAS |
 | **2** | 20 min | Conversational Analysis | Use Copilot CLI for interactive review | Copilot CLI |
-| **3** | 20 min | Custom Tools | Build Python security detector | Python |
-| **4** | 20 min | Integration | Create GitHub Actions workflow | GitHub Actions |
+| **3** | 20 min | Create Custom Agents | Generate fix guides using Copilot CLI | Copilot CLI + .md files |
+| **4** | 20 min | Orchestration | Connect GHAS + Agents in workflow | GitHub Actions |
 | **5** | 20 min | Real-World | Deploy complete ecosystem, see it work | All tools |
 | | **2 hrs** | **TOTAL** | | |
 
@@ -81,8 +80,8 @@ TIER 4: ORCHESTRATION (GitHub Actions Workflow)
 - **[Exercise 0: Prerequisites](docs/0-prereqs.md)** - Setup & verification
 - **[Exercise 1: GitHub NATIVE Security](docs/1-github-native-security.md)** - GHAS fundamentals
 - **[Exercise 2: Copilot CLI Interactive](docs/2-copilot-cli-interactive.md)** - Conversational analysis
-- **[Exercise 3: Custom Detection Tools](docs/3-custom-detection-tools.md)** - Build Python scanners
-- **[Exercise 4: GitHub Actions Integration](docs/4-github-actions-integration.md)** - Orchestrate tools
+- **[Exercise 3: Create Custom Agents](docs/3-custom-agents-creation.md)** - Generate fix guides using CLI
+- **[Exercise 4: GitHub Actions Orchestration](docs/4-github-actions-orchestration.md)** - Connect detection to agents
 - **[Exercise 5: Real-World Ecosystem](docs/5-real-world-ecosystem.md)** - Production deployment
 
 ---
