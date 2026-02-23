@@ -120,18 +120,17 @@ These three risks compound each other...
 
 Now ask a follow-up question about one specific finding:
 
-```
-Let's focus on SQL injection vulnerability that GitHub GHAS probably flagged 
-in the app.py file around the trails search function.
+```bash
+npx @github/copilot -i "Let's focus on SQL injection vulnerability that GitHub GHAS probably flagged in the app.py file around the trails search function.
 
 Can you walk me through:
 1. How would an attacker actually exploit this specific vulnerability?
 2. Show me an example of the SQL injection payload they'd use
 3. What exactly happens on the server when that payload is sent?
-4. Why does using a parameterized query (or prepared statement) stop this attack?
+4. Why does using a parameterized query or prepared statement stop this attack?
 5. Are there any common mistakes developers make when fixing this?
 
-I want to understand the attack chain, not just the fix.
+I want to understand the attack chain, not just the fix."
 ```
 
 **Why this works:**
@@ -260,29 +259,22 @@ This pattern scales across Rails, Django, Node.js...
 
 Ask practical questions about implementation:
 
-```
-Let's talk real constraints. Our CTO gave us 1 week to fix critical vulnerabilities 
-approved by GitHub GHAS. We need to be strategic.
+```bash
+npx @github/copilot -i "Let's talk real constraints. CTO gave us 1 week to fix critical vulnerabilities from GitHub GHAS.
 
-Here are the three critical findings:
+Critical findings:
 1. SQL Injection in app.py (20+ locations)
 2. Broken Authentication in user permissions (10+ locations)
 3. XSS in trail comments section (5 locations)
 
-PLUS we have 8 vulnerable dependencies flagged by Dependabot 
-(Flask 1.1.2→2.3.0, Jinja2 2.11→3.1.0, etc)
+PLUS 8 vulnerable dependencies flagged by Dependabot.
 
-Realistically, if we have:
-- 2 senior developers
-- 1 junior developer
-- Need to maintain customer support
+Team: 2 senior devs, 1 junior, customer support needed.
 
-What's the ACTUAL sequence? What can we do in parallel?
-What MUST we do before the others?
+What's the realistic sequence? What can be parallel?
+What MUST be done first?
 What's negotiable with stakeholders?
-
-And for the dependencies - can we upgrade those safely without breaking 
-the SQL injection fixes we're doing? Or should we upgrade first?
+Can we upgrade dependencies safely with SQL injection fixes? Or upgrade first?"
 ```
 
 **Copilot gives practical guidance:**
@@ -325,31 +317,18 @@ the SQL injection fixes we're doing? Or should we upgrade first?
 
 Ask Copilot to create the actual fix guide:
 
-```
-Alright, let's be concrete. Give me a step-by-step checklist we can actually execute 
-for SQL Injection fixes in SecureTrails.
+```bash
+npx @github/copilot -i "Alright, let's be concrete. Give me a step-by-step checklist for SQL Injection fixes in SecureTrails.
 
 I need:
 
-1. **The Files** - Which app.py functions need fixing? (I suspect trails_search, 
-   user_bookings, admin_reports. Are there others?)
+1. **The Files** - Which app.py functions need fixing? (trails_search, user_bookings, admin_reports?)
+2. **Before/After Code** - Show vulnerable and parameterized examples from 2 different function types
+3. **The Test Cases** - Specific SQL injection payloads for QA (1' OR '1'='1, 1; DROP TABLE trails; --, others?)
+4. **Dependency Notes** - We use MySQLdb 1.2.5. Does it support parameterized queries? Or switch to SQLAlchemy/PyMySQL?
+5. **Risk Mitigation** - What could go wrong? What to back up before starting?
 
-2. **Before/After Code** - Show me the before (vulnerable) and after (parameterized) 
-   for 2 representative examples from different function types
-
-3. **The Test Cases** - What specific SQL injection payloads should our QA team try 
-   to verify each fix works?
-   Examples:
-   - `1' OR '1'='1`
-   - `1; DROP TABLE trails; --`
-   - What other payloads should we test with?
-
-4. **Dependency Notes** - We're using MySQLdb 1.2.5. Does it support parameterized 
-   queries natively, or do we need to switch to SQLAlchemy/PyMySQL?
-
-5. **Risk Mitigation** - What could go wrong? What do we need to back up before we start?
-
-Give me this as a numbered checklist I can screenshot and put on the sprint board.
+Format as numbered checklist for sprint board."
 ```
 - Deployment strategy
 ```

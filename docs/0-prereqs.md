@@ -270,40 +270,31 @@ VS Code
 In VS Code terminal, verify Copilot CLI works:
 
 ```bash
-# Test Copilot CLI version (use standalone 'copilot', NOT 'gh copilot')
+# Test Copilot CLI version
 copilot --version
 # Expected: version 0.0.414 or higher
-
-# Launch copilot interactive shell
-copilot
 ```
 
-**First time running copilot?**
+**Test with an interactive prompt:**
 
-If you see: `"No copilot instructions found. Run /init to generate a copilot-instructions.md file for this project."`
-
-That's normal! Inside the copilot shell, run:
+The correct way to use Copilot CLI for interactive analysis is:
 
 ```bash
-/init
-# This generates copilot-instructions.md for the project
-# You can customize it later to guide Copilot's analysis
+npx @github/copilot -i "Analyze this Flask application for security vulnerabilities. Identify: SQL injection risks, auth flaws, hardcoded credentials."
 ```
 
-**Test a simple analysis:**
+**Alternative: Use full npx path**
 
 ```bash
-Ask Copilot: "Analyze this Flask application for security vulnerabilities. 
-Identify: SQL injection risks, auth flaws, hardcoded credentials."
-
-# Copilot should respond with code analysis
-# Type: /exit to close when done
+npx @github/copilot -i "Your prompt here"
 ```
+
+The `-i` flag starts interactive mode where you can ask follow-up questions.
 
 **Expected:**
 - Copilot responds with code analysis
-- No authorization errors
-- Can explain code structure and find issues
+- Can ask follow-up questions interactively
+- Type `exit` or `Ctrl+C` to close
 
 ---
 
@@ -340,7 +331,7 @@ Verify your setup by checking these items:
 - [ ] Python venv created and activated
 - [ ] Dependencies installed (`pip list` shows Flask, requests, etc.)
 - [ ] Python interpreter set to venv in VS Code
-- [ ] `copilot explain app.py` works (returns analysis)
+- [ ] `npx @github/copilot -i "prompt"` works (returns analysis)
 
 **All checkboxes complete?** → You're ready for Exercise 1! ✅
 
@@ -471,7 +462,9 @@ venv\Scripts\Activate.ps1         # Windows (PowerShell)
 
 # Test Copilot CLI (standalone tool, NOT 'gh copilot' extension)
 copilot --version
-copilot explain app.py
+
+# Use Copilot CLI interactively with a prompt
+npx @github/copilot -i "Your security analysis prompt here"
 
 # Check Python
 python --version

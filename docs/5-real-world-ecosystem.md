@@ -112,12 +112,12 @@ ls -la .github/agents/
 ### Copilot CLI Setup (Tier 4)
 
 ```bash
-# Install (should already be done in Exercise 0)
-which copilot
+# Verify installation
+copilot --version
+# Should show: version 0.0.414 or higher
 
-# Verify authentication
-copilot /login
-# Should show "authenticated as YOUR_USERNAME"
+# Use interactively with npx
+npx @github/copilot -i "Your security question here"
 ```
 
 ---
@@ -251,33 +251,30 @@ Comment on PR:
 Developer sees blocking issue and uses Copilot CLI to understand fix:
 
 ```bash
-copilot
-# Inside copilot shell:
+npx @github/copilot -i "We're using Flask + SQLite. I'm blocked from merging because our code does direct SQL string concatenation.
 
-We're using Flask + SQLite. I've got blocked from merging because our code 
-is doing direct SQL string concatenation. Here's the vulnerable code:
-
+Code:
 ```python
 def search_trails(db_path):
     user_input = request.args.get('location')
-    query = f"SELECT * FROM trails WHERE location = '{user_input}'"
+    query = f\"SELECT * FROM trails WHERE location = '{user_input}'\"
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     cursor.execute(query)
     return cursor.fetchall()
 ```
 
-I NEED to fix this before this PR can merge, and I'm seeing other issues too:
-- Another file is comparing passwords with == (timing attack?)
-- Someone hardcoded a SECRET_KEY
+I see other issues too:
+- Password comparison using == (timing attack?)
+- Hardcoded SECRET_KEY
 
 Help me prioritize:
-1. What should I fix FIRST (highest risk)?
-2. For the SQL injection specifically, show me the parameterized query pattern
-3. For the password comparison, what's the Python library I should use instead?
-4. How do I know my fixes actually work?
+1. What to fix FIRST (highest risk)?
+2. For SQL injection - parameterized query pattern?
+3. For password comparison - which Python library?
+4. How do I know my fixes work?
 
-I have about 1 hour to fix and test before EOD.
+I have 1 hour to fix and test before EOD."
 ```
 
 Copilot responds:
@@ -462,10 +459,8 @@ Before every PR merge, GitHub automatically checks:
 ## Using Copilot CLI for Security Questions
 
 ```bash
-copilot
-/login
-# Ask your security question
-# e.g., "How do I safely store API keys?"
+npx @github/copilot -i "Your security question here"
+# Example: "How do I safely store API keys?"
 ```
 
 ## Escalation

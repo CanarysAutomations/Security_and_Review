@@ -56,15 +56,15 @@ Issue Closes When Fixed
 
 First, ask Copilot CLI to help you understand what the workflow should do:
 
-```
-I'm setting up security automation for a GitHub repository (Python Flask app).
+```bash
+npx @github/copilot -i "I'm setting up security automation for a GitHub repository (Python Flask app).
 
 Here's what I need the workflow to do:
 1. Trigger on every push to main branch
 2. GitHub GHAS automatically scans for CodeQL issues, secrets, vulnerable packages
-3. After GHAS scan completes, I want to create GitHub issues that link to our custom agent fix guides
-4. Each issue should show the vulnerability JSON from GHAS, the fix guide location, and developer instructions
-5. When a developer fixes the issue and pushes, GHAS rescans, and if it's fixed, the issue auto-closes
+3. After GHAS scan completes, create GitHub issues that link to our custom agent fix guides
+4. Each issue should show the vulnerability JSON from GHAS, fix guide location, and developer instructions
+5. When a developer fixes and pushes, GHAS rescans, and if it's fixed, the issue auto-closes
 
 I've already created custom agent .md fix guides in .github/agents/:
 - .github/agents/sql-injection-fix-guide.md
@@ -79,7 +79,7 @@ Can you help me understand:
 4. What GitHub Actions are available for reading security findings?
 5. How do I format the issue body so developers immediately see the fix guide link?
 
-This needs to work for a 3-person team where not everyone knows all the vulnerabilities.
+This is for a 3-person team where not everyone knows all the vulnerabilities."
 ```
 
 **Copilot explains:**
