@@ -19,14 +19,14 @@
 
 ## 📖 Scenario
 
-**GitHub GHAS told us WHAT vulnerabilities exist.**  
+**GitHub GHAS detected vulnerabilities in securetrails-workshop.**  
 **Now: Why do they exist? How serious? What's the best fix?**
 
 This is where **Copilot CLI's conversational capability** adds value:
-- Interactive discussion
-- Contextual reasoning
-- Follow-up questions
-- Trade-off analysis
+- Interactive discussion about findings
+- Contextual reasoning about impact
+- Follow-up questions about architecture
+- Trade-off analysis for fixes
 
 GitHub GHAS = Automated detection  
 Copilot CLI = Human-like reasoning
@@ -70,10 +70,10 @@ for trail booking. Based on the code structure, provide:
 3. What architectural patterns would prevent these?
 
 Code paths to consider:
-- apps/securetrails-vulnerable/app.py (backend logic)
-- apps/securetrails-vulnerable/templates/ (user-facing views)
-- apps/securetrails-vulnerable/static/js/ (client-side logic)
-- apps/securetrails-vulnerable/requirements.txt (dependencies)
+- securetrails-workshop/app.py (backend logic)
+- securetrails-workshop/templates/ (user-facing views)
+- securetrails-workshop/static/js/ (client-side logic)
+- securetrails-workshop/requirements.txt (dependencies)
 ```
 
 **Copilot responds** with contextual overview:

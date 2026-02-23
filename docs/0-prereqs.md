@@ -165,14 +165,14 @@ Logged in to github.com with account <your-username>
 
 ---
 
-### Step 5: Clone SecureTrails Repository
+### Step 5: Clone SecureTrails Vulnerable Application
 
-Open terminal in your machine and clone:
+Open terminal and clone the vulnerable repo that you'll audit:
 
 ```bash
-# Clone the SecureTrails vulnerable app
-git clone https://github.com/<your-org>/securetrails-vulnerable.git
-cd securetrails-vulnerable
+# Clone the SecureTrails vulnerable application
+git clone https://github.com/Hemavathi15sg/securetrails-workshop.git
+cd securetrails-workshop
 
 # Verify directory structure
 ls -la
@@ -180,23 +180,22 @@ ls -la
 
 **Expected Directory Structure:**
 ```
-securetrails-vulnerable/
-├── app.py                    # Flask backend (vulnerable)
-├── requirements.txt          # Python dependencies
+securetrails-workshop/
+├── app.py                    # Flask backend (contains SQL injection, auth issues)
+├── requirements.txt          # Python packages (includes vulnerable versions)
 ├── templates/
-│   ├── login.html           # Contains XSS vulnerability
-│   ├── trails.html          # Contains IDOR vulnerability
-│   └── admin.html           # Contains broken auth
+│   ├── login.html           # XSS vulnerability in user input
+│   ├── trails.html          # IDOR (Insecure Direct Object Reference)
+│   └── admin.html           # Broken authentication checks
 ├── static/js/
 │   └── app.js               # Client-side injection points
-├── .env.example             # Contains exposed secrets
+├── .env.example             # Exposed secrets example
 ├── Dockerfile               # Security misconfiguration
-├── database.db              # SQLite with test data
-└── .github/
-    ├── copilot-instructions.md
-    └── workflows/
-        └── security-checks.yml
+├── database.db              # SQLite test data
+└── README.md                # Application documentation
 ```
+
+**This is your test subject for the entire workshop!**
 
 ---
 

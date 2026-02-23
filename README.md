@@ -127,14 +127,17 @@ python3 --version
 ### Quick Start
 
 ```bash
-# 1. Clone this repo
-git clone https://github.com/YOUR_USERNAME/security-workshop.git
-cd security-workshop
+# 1. Clone the VULNERABLE APP (this is what you'll audit)
+git clone https://github.com/Hemavathi15sg/securetrails-workshop.git
+cd securetrails-workshop
 
-# 2. Start Exercise 0
-open docs/0-prereqs.md
+# 2. Set up Python environment
+python -m venv venv
+source venv/bin/activate  # or: venv\Scripts\activate (Windows)
+pip install -r requirements.txt
 
-# 3. Follow the exercises in order
+# 3. In ANOTHER terminal, access the WORKSHOP exercises
+# (Or reference docs from the workshop repo)
 ```
 
 ---
