@@ -98,31 +98,37 @@ Extensions Marketplace
 
 ---
 
-### Step 3: Install GitHub Copilot CLI
+### Step 3: Verify GitHub Copilot CLI is Installed
 
-Open a terminal and run:
+Open a terminal and verify the standalone copilot tool:
 
 ```bash
-# Install Copilot CLI as GitHub CLI extension
-gh extension install github/gh-copilot
-
-# Verify installation (should work after this)
+# Check if copilot is installed
 copilot --version
 # Expected: version 0.0.414 or higher
 ```
 
-**Install Links:**
-- [GitHub CLI Installation](https://cli.github.com/)
-- [Copilot CLI GitHub Repo](https://github.com/github/copilot-cli)
+**If copilot is NOT installed**, install it using one of these methods:
 
-**Troubleshooting:**
 ```bash
-# If gh command not found, ensure GitHub CLI is installed
-# Then try:
-/usr/local/bin/gh extension install github/gh-copilot
+# Option 1: Homebrew (Mac/Linux)
+brew install copilot-cli
 
-# On Windows, use PowerShell or Command Prompt:
-gh extension install github/gh-copilot
+# Option 2: npm (all platforms - Mac/Linux/Windows)
+npm install -g @github/copilot
+
+# Option 3: Windows (winget - PowerShell)
+winget install GitHub.Copilot
+```
+
+**Install Links:**
+- [Copilot CLI GitHub Repo](https://github.com/github/copilot-cli)
+- [Copilot CLI Documentation](https://docs.github.com/en/copilot/github-copilot-cli/about-github-copilot-cli)
+
+**After installation, verify:**
+```bash
+copilot --version
+# Should show: version 0.0.414 or higher
 ```
 
 ---
@@ -266,15 +272,32 @@ In VS Code terminal, verify Copilot CLI works:
 ```bash
 # Test Copilot CLI version (use standalone 'copilot', NOT 'gh copilot')
 copilot --version
+# Expected: version 0.0.414 or higher
 
-# Test Copilot with a simple explanation
-copilot explain app.py
+# Launch copilot interactive shell
+copilot
 ```
 
-**When prompted, provide a test analysis request:**
+**First time running copilot?**
+
+If you see: `"No copilot instructions found. Run /init to generate a copilot-instructions.md file for this project."`
+
+That's normal! Inside the copilot shell, run:
+
+```bash
+/init
+# This generates copilot-instructions.md for the project
+# You can customize it later to guide Copilot's analysis
 ```
-Analyze this Flask application for security vulnerabilities. 
-Identify: SQL injection risks, auth flaws, hardcoded credentials.
+
+**Test a simple analysis:**
+
+```bash
+Ask Copilot: "Analyze this Flask application for security vulnerabilities. 
+Identify: SQL injection risks, auth flaws, hardcoded credentials."
+
+# Copilot should respond with code analysis
+# Type: /exit to close when done
 ```
 
 **Expected:**
@@ -336,15 +359,19 @@ Code → File → Reload Window (or Ctrl+R)
 ```
 
 ### Issue: `gh: extension not found: copilot`
+
+**This error is from the OLD deprecated method.** You don't need the `gh extension` - use the standalone `copilot` tool instead.
+
 ```bash
-# Update GitHub CLI first
-gh upgrade
+# Remove the old gh extension if it exists
+gh extension remove github/gh-copilot  2>/dev/null || true
 
-# Then install Copilot extension
-gh extension install github/gh-copilot
+# Install the standalone copilot CLI
+npm install -g @github/copilot
+# or use: brew install copilot-cli
 
-# If still failing:
-gh extension list  # Show installed extensions
+# Verify it works
+copilot --version
 ```
 
 ### Issue: `Permission denied` on repository clone
