@@ -1,9 +1,9 @@
 # 🔐 SecureTrails Security Workshop
-## Autonomous AI-Powered Security using GitHub Copilot Agents
+## Complete Security Automation: GitHub Native + Copilot CLI + Custom Tools
 
 ![Duration](https://img.shields.io/badge/Duration-2%20Hours-blue)
 ![Level](https://img.shields.io/badge/Level-Intermediate-orange)
-![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Agents%20%26%20CLI-black)
+![Stack](https://img.shields.io/badge/Stack-GHAS%20%7C%20CodeQL%20%7C%20Copilot%20CLI%20%7C%20Custom-blue)
 
 ---
 
