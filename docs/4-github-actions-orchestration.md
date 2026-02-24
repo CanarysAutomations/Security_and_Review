@@ -497,10 +497,7 @@ This script would run in your workflow and automatically create issues linking t
 
 ## 🚀 Next Steps
 
-**Exercise 5**: Real-World Ecosystem
-- Deploy everything together
-- See the complete flow in action
-- Understand when to use each component
+**→ [Exercise 5: Real-World Ecosystem - Deploy Your Complete Security Strategy](./5-real-world-ecosystem.md)**
 
 ---
 

@@ -177,47 +177,6 @@ gh issue create \
 
 **Assessment**: Review and prioritize these findings"
 ```
-
----
-
-## 📋 Step 6: Create Issues from Findings
-
-GitHub can auto-create issues for each finding. Or manually:
-
-```bash
-# Create an issue documenting all GHAS findings
-gh issue create \
-  --title "[SECURITY] GitHub GHAS findings - SecureTrails" \
-  --label "security,review" \
-  --body "## Security Analysis Results (GitHub Native)
-
-### CodeQL Findings
-- SQL Injection (app.py:47) - CRITICAL
-- XSS in templates (templates/trails.html:89) - HIGH  
-- Weak password hashing (app.py:200) - MEDIUM
-
-### Secret Scanning
-- GitHub PAT in .env.example - CRITICAL
-- AWS credentials in app.py - CRITICAL
-- DB password exposed - CRITICAL
-
-### Dependabot Alerts
-- Flask 1.1.0: 2 CVEs (CRITICAL)
-- requests 2.24.0: 1 CVE (MEDIUM)
-- SQLAlchemy 1.3.0: 1 CVE (HIGH)
-
-**Assessment**: NOT PRODUCTION READY
-- 3 critical code vulnerabilities
-- 3 hardcoded secrets  
-- 3 vulnerable packages
-
-**Next Steps**:
-1. Fix code vulnerabilities (CodeQL findings)
-2. Remove hardcoded secrets and use .env
-3. Update vulnerable packages to secure versions
-4. Proceed to Exercise 2 for interactive analysis"
-```
-
 ---
 
 ## 🎯 Key Learning
@@ -237,7 +196,7 @@ GitHub Advanced Security automatically finds three types of issues:
 
 ## 🚀 Next Steps
 
-**Exercise 2** - Use Copilot CLI for deeper, interactive security analysis
+**→ [Exercise 2: Copilot CLI - Interactive Security Analysis](./2-copilot-cli-interactive.md)**
 
 ---
 

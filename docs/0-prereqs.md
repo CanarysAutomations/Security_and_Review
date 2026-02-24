@@ -477,9 +477,9 @@ pip list
 
 Once all acceptance criteria are met, proceed to:
 
-### **[Exercise 1: GitHub Agent Security Review](./1-agent-security-review.md)** →
+### **[Exercise 1: GitHub NATIVE Security (GHAS)](./1-github-native-security.md)** →
 
-This exercise will use the Copilot CLI to discover the first set of vulnerabilities in the SecureTrails application.
+This exercise will enable GitHub's built-in security features to discover vulnerabilities in the SecureTrails application.
 
 ---
 

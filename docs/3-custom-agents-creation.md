@@ -317,10 +317,7 @@ Copilot uses your agent knowledge to guide you through fixes.
 
 ## 🚀 Next Exercise
 
-**Exercise 4**: GitHub Actions Integration
-- Export agents as documentation
-- Link to GitHub issues
-- Automate GHAS → Issue → Agent workflow
+**→ [Exercise 4: GitHub Actions Integration - Orchestrate Detection + Custom Agents](./4-github-actions-orchestration.md)**
 
 ---
 

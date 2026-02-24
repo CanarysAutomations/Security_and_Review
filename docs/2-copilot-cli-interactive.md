@@ -256,9 +256,7 @@ results = database.execute(query, (user_input,))
 
 ## 🚀 Next Steps
 
-**Exercise 3**: Create Custom Agents
-- Custom agents = fix guides that any developer can follow
-- Repeat this "analyze → fix" process consistently across your team
+**→ [Exercise 3: Create Custom Agents Using Copilot CLI](./3-custom-agents-creation.md)**
 
 ---
 
