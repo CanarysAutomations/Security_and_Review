@@ -98,7 +98,7 @@ Once enabled, GitHub starts scanning automatically.
 
 Click **Code scanning** in the left menu:
 
-![Code Scanning Results](./images/5.png)
+
 
 **You'll see:**
 - List of vulnerabilities found by CodeQL
