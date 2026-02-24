@@ -48,31 +48,31 @@ GHAS includes THREE built-in security **SERVICES**:
 
 ### Step 1.1: Go to Repository Settings
 
-In your GitHub repository, click **Settings** tab:
+In your GitHub repository, click **Security** tab:
 
-![Settings Tab Navigation](./images/1.png)
+![Security Tab Navigation](./images/1.png)
 
 **You'll see:**
-- Repository settings options in sidebar
-- Code and repository management options
+- Vulnerability alerts overview
+- Links to enable security features
 
 ---
 
-### Step 1.2: Navigate to Security and Analysis
+### Step 1.2: Navigate to Security settings
 
-Scroll down in Settings sidebar to **Security and analysis** section:
+Scroll down in Settings sidebar to **Advanced Security** section:
 
-![Security Settings Location](./images/2.png)
+**Click**: "Advanced Security" → You'll see available security features
 
-**Click**: "Security and analysis" → You'll see available security features
-
----
-
-### Step 1.3: Enable GHAS Features
 
 Toggle ON all these features:
 
+![Advanced Security Settings Location](./images/2.png)
+
 ![Enable Security Features](./images/3.png)
+
+![Secret Scanning Alerts](./images/5.png)
+
 
 **Enable:**
 - ☑ Dependabot alerts
@@ -85,21 +85,16 @@ Once enabled, GitHub starts scanning automatically.
 
 ---
 
-## 🔍 Step 2: View Security Results via Security Tab
+## 🔍 Step 2: Enable Code Quality (Preview)
 
-### Step 2.1: Open Security Dashboard
-
-Click the **Security** tab in your repository header:
+### Step 2.1: Open Settings → Code quality (preview) is a new GitHub feature that provides code quality insights alongside security findings.
+**Enable Code Quality (Preview)** to get additional insights on code maintainability and potential bugs.
 
 ![Security Tab](./images/4.png)
 
-**You'll see:**
-- Security alerts overview and summary
-- Links to Code scanning, Dependabot, Secret scanning
-
 ---
 
-### Step 2.2: View Code Scanning Results
+### Step 3: View Code Scanning Results
 
 Click **Code scanning** in the left menu:
 
@@ -113,110 +108,33 @@ Click **Code scanning** in the left menu:
 
 ---
 
-## 📊 Step 3: Review CodeQL Vulnerabilities
-
 ### Real Findings in SecureTrails
 
 CodeQL has found vulnerabilities in the app:
 
 ![CodeQL Findings List](./images/6.png)
 
-**Examples you'll see:**
+Copilot autofix suggestions:
+
+![CodeQL Autofix Suggestions](./images/7.png)
 
 ```
-🔴 SQL Injection (CRITICAL)
-Location: app.py:47
-Issue: Unsanitized user input concatenated into SQL query
-Code: database.execute(f"SELECT * WHERE id={user_input}")
-Fix: Use parameterized queries
-
-🟠 XSS in Templates (HIGH)  
-Location: templates/trails.html:89
-Issue: User comment rendered without escaping
-Code: <p>{{ trail.comments }}</p>
-Fix: {{ trail.comments | escape }}
-
-🟡 Weak Cryptography (MEDIUM)
-Location: app.py:200
-Issue: MD5 used for password hashing
-Code: hashlib.md5(password.encode())
-Fix: Use bcrypt instead
-```
-
 **Your task:** Click each finding to understand:
 - Why it's a vulnerability
 - Where exactly it occurs
 - What the recommended fix is
-
----
-
-## 🔑 Step 4: Check Secret Scanning
-
-### Real Secrets Found
-
-GitHub's Secret Scanning automatically detects hardcoded credentials:
-
-![Secret Scanning Alerts](./images/7.png)
-
-**Types of secrets found:**
-
 ```
-🔴 GitHub Personal Access Token (CRITICAL)
-Location: .env.example:3
-Issue: PAT exposed in repository
-Risk: Anyone can use this token to access your GitHub account
-Action: Revoke immediately
+once copilot autofix suggestions are available, review them to understand how GitHub GHAS can even suggest fixes for code vulnerabilities and merge them if you want to.
 
-🔴 AWS Access Key (CRITICAL)
-Location: config.py:18
-Issue: AWS credentials hardcoded  
-Risk: Attacker can access your AWS resources
-Action: Deactivate key and create new one
+![CodeQL Autofix Suggestions](./images/8.png)
 
-🔴 Database Password (CRITICAL)
-Location: .env.example:5
-Issue: DB connection string with password
-Risk: Database can be accessed by unauthorized users
-Action: Rotate password and regenerate connection string
-```
 
-**Your task:** Review each secret:
-- Is this a real credential or test value?
-- Has this ever been used?
-- Is the corresponding service still accessible?
+### 🔍 Step 4: View Secret Scanning Results
 
----
+Similarly, click **Secret scanning** in the left menu: 
 
-## 📦 Step 5: Review Dependabot Alerts
-
-Navigate to **Dependabot** tab to see vulnerable packages:
-
-**You'll see dependencies with known CVEs:**
-
-```
-🔴 Flask 1.1.0 (CRITICAL)
-CVE: CVE-2021-21342  
-Issue: Remote Code Execution possible
-Current: 1.1.0 → Available: 2.3.2
-Action: Update Flask to 2.3.2
-
-🟠 requests 2.24.0 (MEDIUM)
-CVE: CVE-2021-33503
-Issue: URL parsing vulnerability
-Current: 2.24.0 → Available: 2.28.1
-Action: Update requests to 2.28.1
-
-🟠 SQLAlchemy 1.3.0 (HIGH)
-CVE: CVE-2021-XXXXX  
-Issue: SQL injection in legacy code patterns
-Current: 1.3.0 → Available: 2.0.8
-Action: Update SQLAlchemy to 2.0.8
-```
-
-**Your task:** Review the vulnerable packages and understand:
-- What version are you currently using?
-- What's the security issue?
-- What version fixes it?
+And you'll see any hardcoded secrets found in the codebase:
+![Secret Scanning Results](./images/9.png)
 
 ---
 
