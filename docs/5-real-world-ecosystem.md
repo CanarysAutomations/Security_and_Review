@@ -657,3 +657,20 @@ GitHub's tools let you:
 - Maintain compliance automatically
 
 **Any questions before closing?**
+
+---
+
+## 📚 Workshop Navigation
+
+**All Exercises:**
+
+0. [Exercise 0: Prerequisites & Environment Setup](./0-prereqs.md)
+1. [Exercise 1: GitHub NATIVE Security (GHAS)](./1-github-native-security.md)
+2. [Exercise 2: Copilot CLI - Interactive Security Analysis](./2-copilot-cli-interactive.md)
+3. [Exercise 3: Create Custom Agents Using Copilot CLI](./3-custom-agents-creation.md)
+4. [Exercise 4: GitHub Actions Integration - Orchestrate Detection + Custom Agents](./4-github-actions-orchestration.md)
+5. [Exercise 5: Real-World Ecosystem - Deploy Your Complete Security Strategy](./5-real-world-ecosystem.md) ← **You are here**
+
+---
+
+**⏱️ Total Time**: ~2 hours | **Exercises**: 6/6 ✓✓✓ | **Workshop Complete!** 🎉
