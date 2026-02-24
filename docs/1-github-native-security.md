@@ -53,21 +53,18 @@ In your GitHub repository, click **Security** tab:
 ![Settings Tab Navigation](./images/1.png)
 
 **You'll see:**
-- Repository settings options
+- Vulnerability alerts which includes GHAS features
+- These are to enabled to get security insights on your codebase
 
 ---
 
-### Step 1.2: Navigate to Security and Analysis
+### Step 1.2: Navigate to Settings tab
 
-Scroll down in Settings sidebar to **Security and analysis** section:
+Scroll down in Settings sidebar to **Advanced Security** section:
 
 ![Security Settings Location](./images/2.png)
 
-**Click**: "Security and analysis" → You'll see available security features
-
----
-
-### Step 1.3: Enable GHAS Features
+**Click**: "Advanced security" → You'll see available security features
 
 Toggle ON all these features:
 
@@ -113,10 +110,19 @@ CodeQL has found vulnerabilities in the app:
 
 ![CodeQL Findings List](./images/6.png)
 
+
 **Examples you'll see:**
 - SQL Injection (CRITICAL)
 - XSS in templates (HIGH)
 - Weak password hashing (MEDIUM)
+
+![Code Scanning Alerts](./images/7.png)
+
+Copilot can generate fixes for these vulnerabilities, but you can also review them manually. 
+
+![Copilot autofix suggestions](./images/8.png)
+
+
 
 ---
 
@@ -124,7 +130,7 @@ CodeQL has found vulnerabilities in the app:
 
 Click **Secret scanning** in the left menu to see hardcoded secrets found:
 
-![Secret Scanning Alerts](./images/7.png)
+![Secret Scanning Alerts](./images/9.png)
 
 **Types of secrets detected:**
 - GitHub PAT tokens
@@ -137,6 +143,7 @@ Click **Secret scanning** in the left menu to see hardcoded secrets found:
 ## 📦 Step 5: Review Dependabot Alerts
 
 Navigate to **Dependabot** tab to see vulnerable packages:
+![Dependabot Alerts](./images/10.png)
 
 **You'll see:**
 - Flask with known CVEs
