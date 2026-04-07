@@ -22,6 +22,10 @@ In GitHub, go to **Security → Code scanning alerts**. You will see a list like
 | Cross-site scripting | High | templates/trails.html |
 | Weak password hashing | Medium | app.py |
 
+![CodeQL Findings List](./assets/6.png)
+
+![Code Scanning Alerts](./assets/7.png)
+
 Click on the **SQL injection** alert to open its detail view.
 
 ---
@@ -51,6 +55,8 @@ On the same alert page, click **Generate fix**. Copilot Autofix will:
 3. Explain why the fix is safe
 
 Review the diff. If it looks correct, click **Commit fix** to apply it directly.
+
+![Copilot autofix suggestions](./assets/8.png)
 
 > **Tip**: Do NOT accept a fix blindly. Read the diff and confirm it does not break any intentional logic.
 

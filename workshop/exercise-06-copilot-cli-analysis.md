@@ -23,6 +23,8 @@ User input from request.args is concatenated directly into a SQL query string.
 Tell me: (1) how an attacker would exploit this, (2) the exact fix pattern for Flask + SQLite, and (3) how to write a test that proves the fix works."
 ```
 
+![Copilot CLI Interface](./assets/copilotversion.png)
+
 ---
 
 ## Step 2 — Follow Up on Fix Trade-offs

@@ -24,6 +24,8 @@ For each alert, note the **secret type**, **file**, and **line**.
 
 > **Tip**: Even if a secret is in a private repo, treat it as compromised and rotate it immediately.
 
+![Secret Scanning Alerts](./assets/9.png)
+
 ---
 
 ## Step 2 — Review Dependabot Alerts
@@ -35,6 +37,8 @@ Go to **Security → Dependabot alerts**. For each vulnerable package, note:
 - Patched version available
 
 SecureTrails uses intentionally old versions — you should see alerts for Flask, requests, and SQLAlchemy.
+
+![Dependabot Alerts](./assets/10.png)
 
 ---
 

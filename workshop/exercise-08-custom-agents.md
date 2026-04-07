@@ -28,6 +28,14 @@ The agent should be saved as .github/agents/sql-injection-fix.agent.md and inclu
 
 Confirm the file was created at `.github/agents/sql-injection-fix.agent.md`.
 
+![Copilot Custom Agents Menu](./assets/copilot-custom-agents-menu.png)
+
+![Agent Generation Successful](./assets/copilot-agent-success.png)
+
+![Agent Tools Selection](./assets/copilot-agent-tools-selection.png)
+
+![Agent Saved to Repository](./assets/copilot-agent-saved.png)
+
 ---
 
 ## Step 2 — Create the Auth Fix Agent
@@ -53,6 +61,10 @@ I am fixing app.py line 47. Walk me through the exact steps."
 ```
 
 Confirm the agent responds with guidance that references SecureTrails-specific details.
+
+![Select Custom Agent](./assets/agent%20selection.png)
+
+![Custom Agent Fixes Response](./assets/custom%20agent.png)
 
 ---
 

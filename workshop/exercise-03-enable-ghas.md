@@ -16,6 +16,10 @@ GitHub Advanced Security (GHAS) is a set of built-in scanning services that run 
 
 In your GitHub repository, click the **Security** tab, then go to **Settings → Code Security**.
 
+![Settings Tab Navigation](./assets/1.png)
+
+![Security Settings Location](./assets/2.png)
+
 Enable the following:
 
 - **Dependabot alerts** — ON
@@ -26,11 +30,15 @@ Enable the following:
 
 > **Tip**: Push protection blocks commits that contain secrets before they ever reach the repository.
 
+![Enable Security Features](./assets/3.png)
+
 ---
 
 ## Step 2 — Enable Code Quality Preview
 
 In Settings, scroll to **Code quality (preview)** and enable it. This adds maintainability and bug-detection signals alongside security findings.
+
+![Security Tab](./assets/4.png)
 
 ---
 
