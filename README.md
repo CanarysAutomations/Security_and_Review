@@ -73,7 +73,7 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 | Feature | Description |
 |---------|-------------|
-| **Secret Scanning (`#secret-scanning`)** | Scans code for exposed credentials using GitHub's detection patterns |
+| **Secret Scanning (`Plugins`)** | Scans code for exposed credentials using GitHub's detection patterns |
 | **VS Code Code Review** | Reviews a selection or uncommitted changes with inline suggestions and one-click fixes |
 | **Copilot Agent (Inline `Ctrl+I`)** | Applies fix patterns across entire files in one agentic step |
 | **Copilot CLI `/review`** | Agentic CLI code review of git changes — no browser required |
