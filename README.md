@@ -85,8 +85,8 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 ## Getting Started
 
-1. Select use this template to create a new repository
-1. clone and open it in VS Code
+1. Select **use this template** to create a new repository
+1. Clone the repository and open it in VS Code
 1. Ensure **GitHub Copilot** and **GitHub Copilot Chat** extensions are installed and signed in
 1. Open the Copilot Chat panel (`Ctrl+Alt+I`)
 1. Start with [Exercise 01](workshop/exercise-01-setup.md)
