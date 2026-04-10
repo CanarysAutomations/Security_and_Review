@@ -6,4 +6,4 @@ Jinja2==2.11.0
 MarkupSafe==1.1.0
 click==7.1.0
 itsdangerous==1.1.0
-Flask-CORS==3.0.8
+Flask-CORS==6.0.0
