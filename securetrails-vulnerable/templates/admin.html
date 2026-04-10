@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureTrails - Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <div class="admin-actions">
+        <h2>User Management</h2>
+        <p>Viewing user ID: {{ user_id }}</p>
+
+        <button onclick="deleteUser()">Delete User</button>
+        <button onclick="resetPassword()">Reset Password</button>
+        <button onclick="grantAdminAccess()">Grant Admin Access</button>
+    </div>
+
+    <script>
+        function deleteUser() {
+            fetch(`/api/users/{{ user_id }}/delete`, {method: 'POST'});
+        }
+    </script>
+</body>
+</html>
