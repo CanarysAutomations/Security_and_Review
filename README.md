@@ -93,4 +93,4 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 ---
 
-> **Instructor Note**: Each exercise has `<!-- Instructor Guide -->` comments visible only in markdown source. Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. The [`securetrails-vulnerable/VULNERABILITIES.md`](securetrails-vulnerable/VULNERABILITIES.md) file contains exact file paths and line numbers — do not share with attendees before they attempt the exercises.
+> **Instructor Note**: Each exercise has `<!-- Instructor Guide -->` comments visible only in markdown source. Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. 
