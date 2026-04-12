@@ -18,7 +18,7 @@ CLI interactive mode gives you a security consultant in your terminal. Unlike on
 
 ```bash
 cd securetrails-vulnerable
-gh copilot chat
+copilot 
 ```
 
 ---

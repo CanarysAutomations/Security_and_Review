@@ -17,6 +17,7 @@ These are different from Copilot Chat: they use specialised models focused on su
 ---
 
 ## Step 1 — Scan for Hardcoded Secrets
+Open copilot chat (`Ctrl+Alt+I`) and use the `/plugin`, from marketplace select `advanced-security` to activate the secret scanning skill. 
 
 Open `config.py` in VS Code. In Copilot Chat (`Ctrl+Alt+I`), type `#secret-scanning` to activate the skill, then paste the prompt below:
 
@@ -24,7 +25,7 @@ Open `config.py` in VS Code. In Copilot Chat (`Ctrl+Alt+I`), type `#secret-scann
 Scan config.py for any hardcoded secrets, API keys, passwords, tokens, or credentials. Use the secret scanning skill to check each value against known secret patterns. List every finding with: variable name | value type | risk level | recommended fix.
 ```
 
-Then repeat for `app.py`:
+Then repeat for `app.py` (optional):
 
 ```
 Scan app.py for hardcoded secrets, JWT tokens, and API keys. List every finding with file, variable name, line number, and the os.environ.get() replacement needed.
@@ -34,7 +35,7 @@ Scan app.py for hardcoded secrets, JWT tokens, and API keys. List every finding 
 
 ## Step 2 — Review a Function with VS Code Code Review (Selection Mode)
 
-Open `app.py`. Select the entire `login()` function (lines 23–40).
+Open `app.py`. Select the entire `login()` function (lines 24–41).
 
 **Right-click** the selection → **Copilot** → **Review and Comment**.
 
@@ -70,9 +71,10 @@ Do not commit any changes yet — you will fix them properly in Exercises 03 and
 
 ## Step 5 — Customise Reviews with OWASP Instructions *(Optional)*
 
-To focus every future review on OWASP Top 10 checks, add to `.github/copilot-instructions.md`:
+To focus every future review on OWASP Top 10 checks, create `.github/copilot-instructions.md`, select it as context in chat and then use `/create-instruction` with the following prompt:
 
 ```markdown
+Update the copilot-instructions.md file with the following content:
 When performing a code review, apply the OWASP Top 10 2021 checklist.
 Focus on: A01 Broken Access Control, A02 Cryptographic Failures, A03 Injection, A05 Security Misconfiguration.
 Flag any user input that reaches a database query, file path, or HTML output without sanitisation.
@@ -86,12 +88,13 @@ Flag any user input that reaches a database query, file path, or HTML output wit
 - [ ] Selection review on `login()` flagged the SQL injection f-string
 - [ ] Uncommitted changes review generated inline comments across changed files
 - [ ] You understand the difference between selection review and uncommitted changes review
+- [ ] You understand how to create copilot-instructions for customising reviews
 
 ---
 
 ## Key Takeaway
 
-> Secret scanning finds committed credentials using GitHub's detection engine; VS Code Code Review surfaces broader code quality and security issues inline — both without leaving the editor.
+> Secret scanning finds committed credentials using GitHub's detection engine; VS Code Code Review surfaces broader code quality and security issues inline — both without leaving the editor; Copilot instructions allow you to customise the review focus.
 
 ---
 

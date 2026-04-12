@@ -73,7 +73,7 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 | Feature | Description |
 |---------|-------------|
-| **Secret Scanning (`#secret-scanning`)** | Scans code for exposed credentials using GitHub's detection patterns |
+| **Secret Scanning (`plugins`)** | Scans code for exposed credentials using GitHub's detection patterns |
 | **VS Code Code Review** | Reviews a selection or uncommitted changes with inline suggestions and one-click fixes |
 | **Copilot Agent (Inline `Ctrl+I`)** | Applies fix patterns across entire files in one agentic step |
 | **Copilot CLI `/review`** | Agentic CLI code review of git changes — no browser required |
@@ -85,12 +85,12 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 ## Getting Started
 
-1. Select use this template to create a new repository
-1. clone and open it in VS Code
+1. Select **use this template** to create a new repository
+1. Clone the repository and open it in VS Code
 1. Ensure **GitHub Copilot** and **GitHub Copilot Chat** extensions are installed and signed in
 1. Open the Copilot Chat panel (`Ctrl+Alt+I`)
 1. Start with [Exercise 01](workshop/exercise-01-setup.md)
 
 ---
 
-> **Instructor Note**: Each exercise has `<!-- Instructor Guide -->` comments visible only in markdown source. Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. The [`securetrails-vulnerable/VULNERABILITIES.md`](securetrails-vulnerable/VULNERABILITIES.md) file contains exact file paths and line numbers — do not share with attendees before they attempt the exercises.
+> **Instructor Note**: Each exercise has `<!-- Instructor Guide -->` comments visible only in markdown source. Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. 

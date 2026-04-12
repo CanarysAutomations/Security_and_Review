@@ -9,9 +9,9 @@
 ## Background
 
 These are the most dangerous vulnerabilities in SecureTrails:
-- **SQL Injection** (OWASP A03) — user input is directly concatenated into SQL strings at `app.py` lines 30, 52, 132. Fix: parameterized queries.
-- **Broken Authentication** (OWASP A01) — the `/admin` route accepts any URL parameter as `user_id` with no role check (lines 43–46). Fix: session role validation.
-- **IDOR** (OWASP A01) — `/trail/<trail_id>` has no ownership check and a second SQL injection (line 52). Fix: parameterized query + auth check.
+- **SQL Injection** (OWASP A03) — user input is directly concatenated into SQL strings at `app.py`. Fix: parameterized queries.
+- **Broken Authentication** (OWASP A01) — the `/admin` route accepts any URL parameter as `user_id` with no role check. Fix: session role validation.
+- **IDOR** (OWASP A01) — `/trail/<trail_id>` has no ownership check and a second SQL injection. Fix: parameterized query + auth check.
 
 ---
 
@@ -24,7 +24,7 @@ Find every place in app.py where user input from request.args, request.form, or 
 List each as: function name | line number | the vulnerable line of code.
 ```
 
-Expected findings: `login()` line 30, `view_trail()` line 52, `search()` line 132.
+Expected findings: `login()` line 30, `view_trail()` line 53, `search()` line 107.
 
 ---
 
@@ -56,7 +56,7 @@ Rewrite the admin() function so it:
 Show the corrected function.
 ```
 
-Apply the suggested code with `Ctrl+I` on the `admin()` function.
+Apply the suggested code with `Ctrl+enter` on the `admin()` function.
 
 ---
 
@@ -72,7 +72,7 @@ Rewrite it to:
 Return 403 if not authenticated.
 ```
 
-Apply with `Ctrl+I`.
+Apply with `Ctrl+enter`.
 
 ---
 
@@ -88,7 +88,7 @@ Replace it so it:
 Show the corrected block.
 ```
 
-Apply with `Ctrl+I`.
+Apply with `Ctrl+enter`.
 
 ---
 
@@ -103,15 +103,15 @@ Review the updated app.py. Confirm:
 3. The /trail/<id> route requires authentication
 List any remaining issues.
 ```
-
-Commit:
+All these 3 issues are now fixed.
+<!---Commit:
 
 ```bash
 git add app.py
 git commit -m "fix(security): parameterized queries (SQLi x3), admin role check, IDOR auth"
 git push
 ```
-
+--->
 ---
 
 ## Verify

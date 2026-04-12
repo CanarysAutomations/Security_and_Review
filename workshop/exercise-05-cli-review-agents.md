@@ -10,6 +10,8 @@
 
 After applying IDE fixes in Exercises 03–04, the CLI provides a second verification layer:
 - **`/review`** — Copilot's built-in `code-review` agent analyses changes directly in the terminal, without a browser tab
+
+!note:"Ensure there are local uncommitted changes before running /review; make a small test edit first if needed."
 - **Custom agents** — `.agent.md` files in `.github/agents/` package specialist security expertise that any developer can invoke by name, reducing dependency on dedicated security team members
 
 ---

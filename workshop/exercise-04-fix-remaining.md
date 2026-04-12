@@ -10,16 +10,16 @@
 
 After fixing SQL injection and auth in Exercise 03, these vulnerabilities remain:
 
-| Vulnerability | OWASP | File | Line(s) |
-|---------------|-------|------|---------|
-| XSS — unescaped Jinja2 output | A03 | trails.html L12, L13, L17, login.html L11 | |
-| DOM-based XSS — `innerHTML` | A03 | js/app.js L11, trails.html L34 | |
-| `eval()` usage | A03 | js/app.js L2 | |
-| Hardcoded `SECRET_KEY` + `JWT_SECRET` | A02 | app.py L10–11 | |
-| Hardcoded credentials in config | A02 | config.py L6, L12, L17 | |
-| MD5 password hashing | A02 | app.py L63–64 | |
-| Debug mode always on + `/debug` endpoint | A05 | app.py L81 (DEBUG flag), L84–91 (/debug route) | |
-| CORS wildcard `*` | A05 | app.py L14 | |
+| Vulnerability | OWASP | File | 
+|---------------|-------|------|
+| XSS — unescaped Jinja2 output | A03 | trails.html, login.html | 
+| DOM-based XSS — `innerHTML` | A03 | js/app.js, trails.html | 
+| `eval()` usage | A03 | js/app.js | 
+| Hardcoded `SECRET_KEY` + `JWT_SECRET` | A02 | app.py| 
+| Hardcoded credentials in config | A02 | config.py | 
+| MD5 password hashing | A02 | app.py | 
+| Debug mode always on + `/debug` endpoint | A05 | app.py | 
+| CORS wildcard `*` | A05 | app.py | 
 
 ---
 
@@ -32,6 +32,7 @@ The Flask app initialises without explicit autoescaping. Show me how to:
 1. Enable Jinja2 autoescaping for all .html templates in the Flask() constructor call.
 2. Find and remove any {{ variable | safe }} filters in the templates that bypass autoescaping for user-controlled data.
 If autoescape is not set, provide the corrected constructor and list any unsafe | safe usages.
+
 ```
 
 Apply with `Ctrl+I` on the `app = Flask(__name__)` line.

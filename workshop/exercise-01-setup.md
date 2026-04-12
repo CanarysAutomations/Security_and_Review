@@ -14,8 +14,10 @@ This workshop secures **SecureTrails**, a deliberately vulnerable Flask trail-bo
 
 ## Step 1 — Verify Tools
 
+Open a terminal and run:
+
 ```bash
-code --version
+
 python --version
 git --version
 gh --version
@@ -56,8 +58,9 @@ gh auth status   # expected: Logged in to github.com as <your-username>
 
 ```bash
 cd securetrails-vulnerable
-python database.py   # initialises database.db
 code .
+python database.py   # initialises database.db
+
 ```
 
 In VS Code press `Ctrl+Alt+I` to open Copilot Chat. Confirm it is signed in.
