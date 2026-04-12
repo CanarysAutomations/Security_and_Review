@@ -8,7 +8,7 @@
 
 ## Background
 
-`requirements.txt` includes old versions of Flask, Werkzeug, Jinja2, requests, SQLAlchemy, MarkupSafe, click, itsdangerous, and Flask-CORS — all with known CVEs. See `VULNERABILITIES.md` for the full list.
+`requirements.txt` includes old versions of Flask, Werkzeug, Jinja2, requests, SQLAlchemy, MarkupSafe, click, itsdangerous, and Flask-CORS — all with known CVEs. 
 
 ---
 

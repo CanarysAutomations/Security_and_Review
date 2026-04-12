@@ -17,7 +17,7 @@ These are different from Copilot Chat: they use specialised models focused on su
 ---
 
 ## Step 1 — Scan for Hardcoded Secrets
-Open copilot chat (`Ctrl+Alt+I`) and use the `/plugin`, from marketplace select `advanced-security` to activate the secret scanning skill. 
+Open copilot chat (`Ctrl+Alt+I`), go to settings and use the `plugins`, from marketplace select `advanced-security` to activate the secret scanning skill. 
 
 Open `config.py` in VS Code. In Copilot Chat (`Ctrl+Alt+I`), type `#secret-scanning` to activate the skill, then paste the prompt below:
 
