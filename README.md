@@ -48,7 +48,7 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 | # | Exercise | Copilot Feature | Duration |
 |---|----------|----------------|----------|
 | 01 | [Prerequisites & Setup](workshop/exercise-01-setup.md) | — | 5 min |
-| 02 | [Discover: Secret Scanning + VS Code Code Review](workshop/exercise-02-discover-review.md) | `/plugin advanced-security` (secret scanning) · VS Code Code Review | 15 min |
+| 02 | [Discover: Secret Scanning + VS Code Code Review + Copilot Instructions](workshop/exercise-02-discover-review.md) | `/plugin advanced-security` (secret scanning) · VS Code Code Review · Copilot Instructions | 15 min |
 | 03 | [Fix Core Vulnerabilities (SQL Injection + Auth + IDOR)](workshop/exercise-03-fix-core.md) | Copilot Agent (Inline `Ctrl+I`) · Copilot Chat | 15 min |
 | 04 | [Fix Remaining Vulnerabilities (XSS, Secrets, Weak Crypto, Debug Mode)](workshop/exercise-04-fix-remaining.md) | Copilot Agent (Inline `Ctrl+I`) · Copilot Chat | 15 min |
 | 05 | [CLI: Agentic Review + Custom Agents](workshop/exercise-05-cli-review-agents.md) | Copilot CLI `/review` command · Custom Agents (agents) | 15 min |
@@ -75,6 +75,7 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 |---------|-------------|
 | **Secret Scanning (`plugins`)** | Scans code for exposed credentials using GitHub's detection patterns |
 | **VS Code Code Review** | Reviews a selection or uncommitted changes with inline suggestions and one-click fixes |
+| **Copilot Instructions** | Customises Copilot's behaviour in reviews and chat with repository-specific instructions |
 | **Copilot Agent (Inline `Ctrl+I`)** | Applies fix patterns across entire files in one agentic step |
 | **Copilot CLI `/review`** | Agentic CLI code review of git changes — no browser required |
 | **Custom Agents (`.agent.md`)** | Reusable, committable security expertise packages per vulnerability class |
@@ -93,4 +94,4 @@ By the end of the mandatory track you will have: detected hardcoded secrets with
 
 ---
 
-> **Instructor Note**: Each exercise has `<!-- Instructor Guide -->` comments visible only in markdown source. Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. 
+> **Instructor Note**: Exercises are designed so attendees never need to copy code — they copy **prompts** and let Copilot generate the output. 
