@@ -35,7 +35,7 @@ If autoescape is not set, provide the corrected constructor and list any unsafe 
 
 ```
 
-Apply with `Ctrl+I` on the `app = Flask(__name__)` line.
+Apply with `Ctrl+Enter` on the `app = Flask(__name__)` line.
 
 Then in Copilot Chat with `#app.py`, paste:
 
@@ -45,7 +45,7 @@ Policy: allow scripts only from 'self', disallow inline scripts, disallow eval, 
 Show the exact Flask code.
 ```
 
-Apply with `Ctrl+I`.
+Apply with `Ctrl+Enter`.
 
 ---
 
@@ -62,7 +62,7 @@ For each:
 Show the corrected file.
 ```
 
-Apply with `Ctrl+I` on the full file contents.
+Apply with `Ctrl+Enter` on the full file contents.
 
 ---
 
@@ -71,13 +71,13 @@ Apply with `Ctrl+I` on the full file contents.
 Open `app.py`. In Copilot Chat with `#app.py`, paste:
 
 ```
-Replace the hardcoded app.secret_key and JWT_SECRET values (lines 10–11) with os.environ.get() calls.
+Replace the hardcoded app.secret_key and JWT_SECRET values  with os.environ.get() calls.
 Add import os at the top if not present.
 Use 'SECRET_KEY' and 'JWT_SECRET' as the environment variable names.
 Do not change any other lines.
 ```
 
-Apply with `Ctrl+I`. Then repeat for `config.py`:
+Apply with `Ctrl+Enter`. Then repeat for `config.py`:
 
 ```
 Replace every hardcoded string value for SECRET_KEY, API_KEY, and the database connection string in config.py with os.environ.get('VARIABLE_NAME', '') calls.
@@ -96,7 +96,7 @@ Replace it with werkzeug.security.generate_password_hash() and update the login 
 Show all changes needed in app.py and the updated login() function.
 ```
 
-Apply with `Ctrl+I`.
+Apply with `Ctrl+Enter`.
 
 ---
 
@@ -107,11 +107,11 @@ In Copilot Chat with `#app.py`, paste:
 ```
 1. The DEBUG flag is hardcoded to True. Replace it with os.environ.get('DEBUG', 'False') == 'True'.
 2. The /debug route exposes secret_key, JWT_SECRET, and database details. Remove this route entirely.
-3. The CORS(app, origins="*") at line 14 allows all origins. Replace it with CORS(app, origins=["http://localhost:5000"]) or read allowed origins from an environment variable.
+3. The CORS(app, origins="*") allows all origins. Replace it with CORS(app, origins=["http://localhost:5000"]) or read allowed origins from an environment variable.
 Show all three changes.
 ```
 
-Apply with `Ctrl+I`.
+Apply with `Ctrl+Enter`.
 
 ---
 

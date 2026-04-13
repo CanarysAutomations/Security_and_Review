@@ -20,7 +20,7 @@ After applying IDE fixes in Exercises 03–04, the CLI provides a second verific
 
 ## Step 1 — Start Copilot CLI
 
-Navigate to `securetrails-vulnerable/` and start an interactive session:
+Navigate to `securetrails-vulnerable/` in your terminal and start an interactive session:
 
 ```bash
 cd securetrails-vulnerable
@@ -61,7 +61,11 @@ Continue in the same session with a plain-language prompt:
 ```
 Check static/js/app.js for: eval() usage, innerHTML with untrusted data, sensitive data in console.log, and missing CSRF tokens on fetch() calls
 ```
+You can also use @filename to specify the file:
 
+```
+/review @static/js/app.js — check for: eval() usage, innerHTML with untrusted data, sensitive data in console.log, and missing CSRF tokens on fetch() calls
+```
 ---
 
 ## Step 4 — Create the SQL Injection Remediation Agent

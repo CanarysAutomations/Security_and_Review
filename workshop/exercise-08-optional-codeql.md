@@ -24,7 +24,7 @@ Copilot Autofix is separate from Copilot Chat. It is a GHAS-integrated fix gener
 
 ## Step 2 — Generate Autofix
 
-Click **Generate fix** on the alert page. Wait for Copilot to produce a patch diff.
+Click **Generate fix** on the alert page. Wait for Copilot to produce a patch diff. You can review the proposed changes and commit directly from this page.
 
 ---
 
@@ -47,12 +47,16 @@ Wait 5–10 minutes for CodeQL to rescan. Verify alert status → **Fixed**.
 
 ---
 
+## Step 5 - Secret Scanning Alerts
+
+Push protection if enabled will not allow you to push secrets. You can test this by adding a fake secret in a file and trying to push. If you have access to the secret scanning alerts, you can also review those directly from the GHAS alert page.
+
 ## Verify
 
 - [ ] Autofix generated a diff
 - [ ] Copilot Chat confirmed the fix is correct
 - [ ] Fix committed and CodeQL alert moved to Fixed
-
+- [ ] Secret scanning alert triggered on push of a fake secret, or reviewed in GHAS if you have access
 ---
 
 ## Key Takeaway

@@ -53,7 +53,7 @@ Review each draft before confirming creation. Approve each with **Yes** when pro
 Copy and paste the following prompt:
 
 ```
-Using the GitHub Issues MCP tool, create a GitHub Issue for the broken access control vulnerability in the /admin route of app.py (lines 43–46).
+Using the GitHub Issues MCP tool, create a GitHub Issue for the broken access control vulnerability in the /admin route of app.py.
 
 Title: [Security][A01] /admin route — no role check, IDOR via URL parameter
 Body: describe that any user can access the admin panel by passing ?user_id= in the URL, state OWASP A01:2021, list the session role check fix, and mention CVSS High.
